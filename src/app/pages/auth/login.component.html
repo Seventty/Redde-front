@@ -7,26 +7,27 @@
                 <div class="flex items-center mb-12">
                     <img src="/images/logo-redde.png" class="ml-4" style="width: 100px" alt="logo" />
                 </div>
-                <form [formGroup]="loginForm" class="form-container" autocomplete="on" >
+                <form [formGroup]="loginForm" class="form-container" autocomplete="on">
                     <p-iconfield>
                         <p-inputicon class="pi pi-envelope" />
-                        <input pInputText type="text" name="email" autocomplete="email" placeholder="Email" class="block mb-4"
-                            style="max-width: 320px; min-width: 270px" formControlName="email"/>
+                        <input pInputText type="text" name="email" autocomplete="email" placeholder="Email"
+                            class="block mb-4" style="max-width: 320px; min-width: 270px" formControlName="email" />
                     </p-iconfield>
 
                     <p-iconfield>
                         <p-inputicon class="pi pi-key" />
-                        <input pInputText type="password" name="password" autocomplete="current-password" placeholder="Password" class="block mb-4"
-                            style="max-width: 320px; min-width: 270px" formControlName="password"/>
+                        <input pInputText type="password" name="password" autocomplete="current-password"
+                            placeholder="Password" class="block mb-4" style="max-width: 320px; min-width: 270px"
+                            formControlName="password" />
                     </p-iconfield>
                     <a href="#" class="flex text-surface-500 dark:text-surface-400 mb-6 text-sm">Forgot your
                         password?</a>
                 </form>
                 <div class="mt-6">
-                    <button pButton pRipple class="block" type="submit"
-                        style="max-width: 320px; margin-bottom: 32px" (click)="onSubmit()" >Login</button>
+                    <button pButton pRipple class="block" type="submit" style="max-width: 320px; margin-bottom: 32px"
+                        (click)="onSubmit()">Login</button>
                     <span class="flex text-sm text-surface-500 dark:text-surface-400">Don’t have an account?<a
-                            class="cursor-pointer ml-1">Sign-up here</a></span>
+                            class="cursor-pointer ml-1" [routerLink]="['/register']">Sign-up here</a></span>
                 </div>
             </div>
         </p-fluid>

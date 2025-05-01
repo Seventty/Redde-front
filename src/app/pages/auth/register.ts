@@ -1,81 +1,124 @@
-import {Component, inject} from '@angular/core';
-import {IconField} from 'primeng/iconfield';
-import {InputIcon} from 'primeng/inputicon';
-import {ButtonModule} from 'primeng/button';
-import {RouterModule} from '@angular/router';
-import {FormsModule} from '@angular/forms';
-import {InputText} from 'primeng/inputtext';
-import {Checkbox} from 'primeng/checkbox';
-import {Fluid} from 'primeng/fluid';
-import {LayoutService} from '@/layout/service/layout.service';
-import {Ripple} from 'primeng/ripple';
-import {AppConfigurator} from "@/layout/components/app.configurator";
-import {CommonModule} from "@angular/common";
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
+import { IconField } from 'primeng/iconfield';
+import { InputIcon } from 'primeng/inputicon';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { RippleModule } from 'primeng/ripple';
+import { Fluid } from 'primeng/fluid';
+import { CommonModule } from '@angular/common';
+import { LayoutService } from '@/layout/service/layout.service';
+import { HttpClient } from '@angular/common/http';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-register',
     standalone: true,
-    imports: [CommonModule, IconField, InputIcon, ButtonModule, RouterModule, FormsModule, InputText, Checkbox, Fluid, Ripple, AppConfigurator],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        RouterModule,
+        IconField,
+        InputIcon,
+        ButtonModule,
+        InputTextModule,
+        RippleModule,
+        Fluid,
+        ToastModule
+    ],
+    providers: [MessageService],
     template: `
-        <div [class]="'flex min-h-screen  ' + (layoutService.isDarkTheme() ? 'layout-dark' : 'layout-light')">
-            <div *ngIf="layoutService.isDarkTheme()" class="w-6/12 h-screen hidden md:block flex-shrink-0" style="max-width: 490px; background-image: url('/images/pages/register-ondark.png'); background-repeat: no-repeat; background-size: cover"></div>
-            <div *ngIf="!layoutService.isDarkTheme()" class="w-6/12 h-screen hidden md:block flex-shrink-0" style="max-width: 490px; background-image: url('/images/pages/register-onlight.png'); background-repeat: no-repeat; background-size: cover"></div>
-            <div class="w-full" style="background: var(--surface-ground)">
-                <p-fluid class="min-h-screen text-center w-full flex items-center md:items-start justify-center flex-col bg-auto md:bg-contain !bg-no-repeat" style="padding: 20% 10% 20% 10%; background: var(--exception-pages-image); background-size: contain;">
-                    <div class="flex flex-col">
-                        <div class="flex items-center mb-12">
-                            <img src="/images/logo-{{ layoutService.isDarkTheme() ? 'light' : 'dark' }}.png" style="width: 45px" alt="logo" />
-                            <img src="/images/appname-{{ layoutService.isDarkTheme() ? 'light' : 'dark' }}.png" class="ml-4" style="width: 100px" alt="logo" />
-                        </div>
-                        <div class="form-container text-left" style="max-width: 320px; min-width: 270px">
-                            <span class="text-2xl font-semibold m-0 mb-2">Register</span>
-                            <span class="block text-surface-600 dark:text-surface-200 font-medium mb-6">Let's get started</span>
-
-                            <p-icon-field>
-                                <p-inputicon class="pi pi-user" />
-                                <input pInputText type="text" placeholder="Username" class="block mb-4" style="max-width: 320px; min-width: 270px" />
-                            </p-icon-field>
-
-                            <p-icon-field>
-                                <p-inputicon class="pi pi-envelope" />
-                                <input pInputText type="text" autocomplete="off" placeholder="Email" class="block mb-4" style="max-width: 320px; min-width: 270px" />
-                            </p-icon-field>
-                            <p-icon-field>
-                                <p-inputicon class="pi pi-key" />
-                                <input pInputText type="password" autocomplete="off" placeholder="Password" class="block mb-4" style="max-width: 320px; min-width: 270px" />
-                            </p-icon-field>
-
-                            <div class="mt-2 flex flex-wrap">
-                                <p-checkbox type="checkbox" id="confirmed" [(ngModel)]="confirmed" class="mr-2" />
-                                <label for="confirmed" class="text-surface-900 dark:text-surface-0 font-medium mr-2">I have read the</label>
-                                <a class="text-surface-600 dark:text-surface-200 hover:text-primary cursor-pointer">Terms and Conditions</a>
-                            </div>
-                        </div>
-                        <div class="mt-6 text-left" style="max-width: 320px; min-width: 270px">
-                            <div class="flex items-center gap-4">
-                                <button pButton pRipple type="button" [routerLink]="['/']" class="block" severity="danger" outlined style="max-width: 320px; margin-bottom: 32px">Cancel</button>
-                                <button pButton pRipple type="button" class="block" style="max-width: 320px; margin-bottom: 32px">Submit</button>
-                            </div>
-                            <span class="font-medium text-surface-600 dark:text-surface-200"
-                                >Already have an account? <a class="font-semibold cursor-pointer text-surface-900 dark:text-surface-0 hover:text-primary transition-colors duration-300">Login</a></span
-                            >
-                        </div>
+    <div [class]="'flex min-h-screen ' + (layoutService.isDarkTheme() ? 'layout-dark' : 'layout-light')">
+        <div class="w-full" style="background: var(--surface-ground)">
+            <p-fluid class="min-h-screen text-center w-full flex items-center justify-center flex-col bg-auto bg-contain !bg-no-repeat"
+                style="padding: 20% 10% 20% 10%; background: var(--exception-pages-image); background-size: contain;">
+                <div class="flex flex-col">
+                    <div class="flex items-center mb-12">
+                        <img src="/images/logo-redde.png" class="ml-4" style="width: 100px" alt="logo" />
                     </div>
+                    <form [formGroup]="registerForm" class="form-container text-left" style="max-width: 320px; min-width: 270px">
+                        <span class="text-2xl font-semibold mb-2">Register</span>
+                        <span class="block text-surface-600 dark:text-surface-200 font-medium mb-6">Let's get started</span>
 
-                    <div class="flex items-center mt-6">
-                        <div class="flex items-center pr-6 mr-6 border-r border-surface-200 dark:border-surface-700">
-                            <img src="/images/logo-gray.png" style="width: 22px" alt="logo" />
-                            <img src="/images/appname-gray.png" class="ml-2" style="width: 45px" alt="logo" />
+                        <p-icon-field>
+                            <p-inputicon class="pi pi-user" />
+                            <input pInputText type="text" placeholder="First Name" formControlName="firstName"
+                                class="block mb-4" />
+                        </p-icon-field>
+
+                        <p-icon-field>
+                            <p-inputicon class="pi pi-envelope" />
+                            <input pInputText type="email" autocomplete="email" placeholder="Email" formControlName="email"
+                                class="block mb-4" />
+                        </p-icon-field>
+
+                        <p-icon-field>
+                            <p-inputicon class="pi pi-key" />
+                            <input pInputText type="password" autocomplete="new-password" placeholder="Password" formControlName="password"
+                                class="block mb-4" />
+                        </p-icon-field>
+
+                        <div class="mt-6 flex items-center gap-4">
+                            <button pButton pRipple type="button" severity="danger" outlined
+                                style="max-width: 320px; margin-bottom: 32px" [routerLink]="['/login']">Cancel</button>
+                            <button pButton pRipple type="button" (click)="onSubmit()" class="block"
+                                style="max-width: 320px; margin-bottom: 32px">Submit</button>
                         </div>
-                        <span class="text-sm text-surface-500 dark:text-surface-400 mr-4">Copyright 2025</span>
-                    </div>
-                </p-fluid>
-            </div>
+
+                        <span class="text-sm text-surface-500 dark:text-surface-400">Already have an account?
+                            <a [routerLink]="['/login']" class="cursor-pointer ml-1 text-primary-500 hover:underline">Login</a>
+                        </span>
+                    </form>
+                    <p-toast></p-toast>
+                </div>
+            </p-fluid>
         </div>
-        <app-configurator [simple]="true"/>`
+    </div>
+    `
 })
 export class Register {
-    confirmed: boolean = false;
-
     layoutService = inject(LayoutService);
+    fb = inject(FormBuilder);
+    http = inject(HttpClient);
+    router = inject(Router);
+    messageService = inject(MessageService);
+
+    registerForm: FormGroup = this.fb.group({
+        firstName: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', Validators.required]
+    });
+
+    onSubmit() {
+        if (this.registerForm.valid) {
+            const { firstName, email, password } = this.registerForm.value;
+
+            this.http.post('/api/auth/register', { name: firstName, email, password }).subscribe({
+                next: () => {
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Registro exitoso',
+                        detail: 'Redirigiendo al login...'
+                    });
+                    setTimeout(() => this.router.navigate(['/login']), 1000);
+                },
+                error: (err) => {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Error en registro',
+                        detail: err?.error?.message || 'No se pudo completar el registro'
+                    });
+                }
+            });
+        } else {
+            this.messageService.add({
+                severity: 'warn',
+                summary: 'Formulario inválido',
+                detail: 'Revisa los campos requeridos'
+            });
+            this.registerForm.markAllAsTouched();
+        }
+    }
 }
