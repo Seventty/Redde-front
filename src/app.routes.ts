@@ -2,6 +2,9 @@
 import { Routes } from '@angular/router';
 import { AppLayout } from '@/layout/components/app.layout';
 import { canActivateGuard } from '@/shared/core/auth.guard';
+import { UsersComponent } from '@/pages/users/users.component';
+import { CompaniesComponent } from '@/pages/companies/companies.component';
+import { CompaniesFormComponent } from '@/pages/companies-crud/companies-form/companies-form.component';
 
 export const appRoutes: Routes = [
   {
@@ -18,6 +21,22 @@ export const appRoutes: Routes = [
         path: 'home',
         loadComponent: () =>
           import('@/pages/dashboard/homeDashboard').then((m) => m.HomeDashboard)
+      },
+      {
+        path: 'user/users',
+        component: UsersComponent
+      },
+      {
+        path: 'user/companies',
+        component: CompaniesComponent
+      },
+      {
+        path: 'company/create',
+        component: CompaniesFormComponent
+      },
+      {
+        path: 'company/detail',
+        component: CompaniesComponent
       }
     ]
   },

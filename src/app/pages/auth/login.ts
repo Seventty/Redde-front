@@ -21,7 +21,39 @@ import { AuthService } from '@/shared/services/auth/auth.service';
     standalone: true,
     imports: [CommonModule, ToastModule, ReactiveFormsModule, RouterModule, ButtonModule, CheckboxModule, InputTextModule, PasswordModule, RippleModule, IconField, InputIcon, Fluid],
     providers: [MessageService],
-    templateUrl: './login.component.html'
+    template: `
+        <div [class]="'flex min-h-screen  ' + (layoutService.isDarkTheme() ? 'layout-dark' : 'layout-light')">
+            <div class="w-full" style="background: var(--surface-ground)">
+                <p-fluid
+                    class="min-h-screen text-center w-full flex items-center md:items-center justify-center flex-col bg-auto md:bg-contain !bg-no-repeat"
+                    style="padding: 20% 10% 20% 10%; background: var(--exception-pages-image); background-size: contain;"
+                >
+                    <div class="flex flex-col">
+                        <div class="flex items-center mb-12">
+                            <img src="/images/logo-redde.png" class="ml-4" style="width: 100px" alt="logo" />
+                        </div>
+                        <form [formGroup]="loginForm" class="form-container" autocomplete="on">
+                            <p-iconfield>
+                                <p-inputicon class="pi pi-envelope" />
+                                <input pInputText type="text" name="email" autocomplete="email" placeholder="Email" class="block mb-4" style="max-width: 320px; min-width: 270px" formControlName="email" />
+                            </p-iconfield>
+
+                            <p-iconfield>
+                                <p-inputicon class="pi pi-key" />
+                                <input pInputText type="password" name="password" autocomplete="current-password" placeholder="Password" class="block mb-4" style="max-width: 320px; min-width: 270px" formControlName="password" />
+                            </p-iconfield>
+                            <a href="#" class="flex text-surface-500 dark:text-surface-400 mb-6 text-sm">Forgot your password?</a>
+                        </form>
+                        <div class="mt-6">
+                            <button pButton pRipple class="block" type="submit" style="max-width: 320px; margin-bottom: 32px" (click)="onSubmit()">Login</button>
+                            <span class="flex text-sm text-surface-500 dark:text-surface-400">Don’t have an account?<a class="cursor-pointer ml-1" [routerLink]="['/register']">Sign-up here</a></span>
+                        </div>
+                    </div>
+                </p-fluid>
+            </div>
+        </div>
+        <p-toast></p-toast>
+    `
 })
 export class Login {
     layoutService = inject(LayoutService);

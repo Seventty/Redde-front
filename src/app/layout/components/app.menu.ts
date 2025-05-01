@@ -48,7 +48,6 @@ export class AppMenu {
     constructor() {
         this.authService.role$.subscribe((role) => {
             this.model = this.getMenuByRole(role);
-            console.log("Se esta llenando esta mamada por el rol?", role);
         });
     }
 
@@ -63,7 +62,7 @@ export class AppMenu {
                         {
                             label: 'Users',
                             icon: 'pi pi-fw pi-user',
-                            routerLink: ['/']
+                            routerLink: ['/user/users']
                         }
                     ]
                 },
@@ -74,7 +73,7 @@ export class AppMenu {
                         {
                             label: 'Companies',
                             icon: 'pi pi-fw pi-building',
-                            routerLink: ['/']
+                            routerLink: ['/user/companies']
                         }
                     ]
                 }
@@ -88,12 +87,12 @@ export class AppMenu {
                         {
                             label: 'Create company',
                             icon: 'pi pi-fw pi-plus',
-                            routerLink: ['/']
+                            routerLink: ['/company/create']
                         },
                         {
                             label: 'Company managment',
                             icon: 'pi pi-fw pi-building',
-                            routerLink: ['/']
+                            routerLink: ['/company/detail']
                         }
                     ]
                 },
