@@ -1,28 +1,28 @@
-import {Component, inject} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {RouterModule} from '@angular/router';
-import {ButtonModule} from 'primeng/button';
-import {CheckboxModule} from 'primeng/checkbox';
-import {InputTextModule} from 'primeng/inputtext';
-import {PasswordModule} from 'primeng/password';
-import {RippleModule} from 'primeng/ripple';
-import {InputIcon} from 'primeng/inputicon';
-import {IconField} from 'primeng/iconfield';
-import {LayoutService} from '@/layout/service/layout.service';
-import {Fluid} from 'primeng/fluid';
-import {AppConfigurator} from "@/layout/components/app.configurator";
-import {CommonModule} from "@angular/common";
+import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
+import { RippleModule } from 'primeng/ripple';
+import { InputIcon } from 'primeng/inputicon';
+import { IconField } from 'primeng/iconfield';
+import { LayoutService } from '@/layout/service/layout.service';
+import { Fluid } from 'primeng/fluid';
+import { AppConfigurator } from '@/layout/components/app.configurator';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-login',
     standalone: true,
-    imports: [CommonModule, ButtonModule, CheckboxModule, InputTextModule, PasswordModule, FormsModule, RouterModule, RippleModule, InputIcon, IconField, Fluid, AppConfigurator],
-    template: `
-        <div [class]="'flex min-h-screen  ' + (layoutService.isDarkTheme() ? 'layout-dark' : 'layout-light')">
-            <div *ngIf="layoutService.isDarkTheme()" class="w-6/12 h-screen hidden md:block flex-shrink-0" style="max-width: 490px; background-image: url('/images/pages/login-ondark.png'); background-repeat: no-repeat; background-size: cover"></div>
-            <div *ngIf="!layoutService.isDarkTheme()" class="w-6/12 h-screen hidden md:block flex-shrink-0" style="max-width: 490px; background-image: url('/images/pages/login-onlight.png'); background-repeat: no-repeat; background-size: cover"></div>
+    imports: [CommonModule, ButtonModule, CheckboxModule, InputTextModule, PasswordModule, FormsModule, RouterModule, RippleModule, InputIcon, IconField, Fluid],
+    template: ` <div [class]="'flex min-h-screen  ' + (layoutService.isDarkTheme() ? 'layout-dark' : 'layout-light')">
             <div class="w-full" style="background: var(--surface-ground)">
-                <p-fluid class="min-h-screen text-center w-full flex items-center md:items-start justify-center flex-col bg-auto md:bg-contain !bg-no-repeat" style="padding: 20% 10% 20% 10%; background: var(--exception-pages-image); background-size: contain;">
+                <p-fluid
+                    class="min-h-screen text-center w-full flex items-center md:items-center justify-center flex-col bg-auto md:bg-contain !bg-no-repeat"
+                    style="padding: 20% 10% 20% 10%; background: var(--exception-pages-image); background-size: contain;"
+                >
                     <div class="flex flex-col">
                         <div class="flex items-center mb-12">
                             <img src="/images/logo-{{ layoutService.isDarkTheme() ? 'light' : 'dark' }}.png" style="width: 45px" alt="logo" />
@@ -56,7 +56,7 @@ import {CommonModule} from "@angular/common";
                 </p-fluid>
             </div>
         </div>
-        <app-configurator [simple]="true"/>`
+        `
 })
 export class Login {
     layoutService = inject(LayoutService);
