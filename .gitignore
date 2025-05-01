@@ -1,0 +1,48 @@
+# Angular & Node
+/node_modules
+/dist
+/tmp
+/out-tsc
+
+# Compilados y temporales
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+*.swn
+*.bak
+
+# IDEs (VSCode, WebStorm, etc.)
+.vscode/
+.idea/
+*.code-workspace
+
+# Builds de producción
+/build
+/www
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Testing & Coverage
+/coverage
+/karma-coverage/
+
+# Angular config local
+.angular/cache
+.angular/config.json
+
+# Env files (si los tienes en Angular)
+.env
+.env.*.local
+*.env.local
+
+# PrimeNG Atlantis Template (opcional si modificas cosas)
+/src/demo/
+/src/assets/demo/
+/src/assets/layout/variables/
+
+# Tailwind & cache
+/.tailwind-cache
