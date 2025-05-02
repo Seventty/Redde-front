@@ -42,7 +42,6 @@ Thumbs.db
 # PrimeNG Atlantis Template (opcional si modificas cosas)
 /src/demo/
 /src/assets/demo/
-/src/assets/layout/variables/
 
 # Tailwind & cache
 /.tailwind-cache
