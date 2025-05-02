@@ -39,9 +39,5 @@ Thumbs.db
 .env.*.local
 *.env.local
 
-# PrimeNG Atlantis Template (opcional si modificas cosas)
-/src/demo/
-/src/assets/demo/
-
 # Tailwind & cache
 /.tailwind-cache
