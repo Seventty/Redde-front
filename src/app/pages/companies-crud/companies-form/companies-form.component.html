@@ -6,7 +6,8 @@
             <div class="flex flex-col md:flex-row gap-4">
                 <div class="flex flex-wrap gap-2 w-full">
                     <label for="rnc">RNC</label>
-                    <input pInputText id="rnc" type="number" formControlName="rnc" class="w-full" />
+                    <input pInputText id="rnc" type="number" formControlName="rnc" class="w-full" maxlength="9"
+                        (keydown.enter)="onRncEnter()" />
                 </div>
 
                 <div class="flex flex-wrap gap-2 w-full">
@@ -24,71 +25,37 @@
 
             <div class="flex flex-col gap-2 w-full">
                 <label for="categoryId">Categoría</label>
-                <p-dropdown
-                  id="categoryId"
-                  [options]="categories"
-                  optionLabel="name"
-                  optionValue="id"
-                  formControlName="categoryId"
-                  placeholder="Seleccione una categoría"
-                  class="w-full"
-                ></p-dropdown>
-              </div>
+                <p-dropdown id="categoryId" [options]="categories" optionLabel="name" optionValue="id"
+                    formControlName="categoryId" placeholder="Seleccione una categoría" class="w-full"></p-dropdown>
+            </div>
 
-              <div class="flex flex-col gap-2 w-full">
+            <div class="flex flex-col gap-2 w-full">
                 <label for="paymentSchemeId">Esquema de Pago</label>
-                <p-dropdown
-                  id="paymentSchemeId"
-                  [options]="paymentSchemes"
-                  optionLabel="name"
-                  optionValue="id"
-                  formControlName="paymentSchemeId"
-                  placeholder="Seleccione un esquema"
-                  class="w-full"
-                ></p-dropdown>
-              </div>
+                <p-dropdown id="paymentSchemeId" [options]="paymentSchemes" optionLabel="name" optionValue="id"
+                    formControlName="paymentSchemeId" placeholder="Seleccione un esquema" class="w-full"></p-dropdown>
+            </div>
 
-              <div class="flex flex-col gap-2 w-full">
+            <div class="flex flex-col gap-2 w-full">
                 <label for="stateId">Estado</label>
-                <p-dropdown
-                  id="stateId"
-                  [options]="states"
-                  optionLabel="name"
-                  optionValue="id"
-                  formControlName="stateId"
-                  placeholder="Seleccione un estado"
-                  class="w-full"
-                ></p-dropdown>
-              </div>
+                <p-dropdown id="stateId" [options]="states" optionLabel="name" optionValue="id"
+                    formControlName="stateId" placeholder="Seleccione un estado" class="w-full"></p-dropdown>
+            </div>
 
-              <div class="flex flex-col gap-2 w-full">
+            <div class="flex flex-col gap-2 w-full">
                 <label for="economicActivityId">Actividad Económica</label>
-                <p-dropdown
-                  id="economicActivityId"
-                  [options]="economicActivities"
-                  optionLabel="name"
-                  optionValue="id"
-                  formControlName="economicActivityId"
-                  placeholder="Seleccione una actividad"
-                  class="w-full"
-                ></p-dropdown>
-              </div>
+                <p-dropdown id="economicActivityId" [options]="economicActivities" optionLabel="name" optionValue="id"
+                    formControlName="economicActivityId" placeholder="Seleccione una actividad"
+                    class="w-full"></p-dropdown>
+            </div>
 
-              <div class="flex flex-col gap-2 w-full">
+            <div class="flex flex-col gap-2 w-full">
                 <label for="governmentBranchId">Rama Gubernamental</label>
-                <p-dropdown
-                  id="governmentBranchId"
-                  [options]="governmentBranches"
-                  optionLabel="name"
-                  optionValue="id"
-                  formControlName="governmentBranchId"
-                  placeholder="Seleccione una rama"
-                  class="w-full"
-                ></p-dropdown>
-              </div>
+                <p-dropdown id="governmentBranchId" [options]="governmentBranches" optionLabel="name" optionValue="id"
+                    formControlName="governmentBranchId" placeholder="Seleccione una rama" class="w-full"></p-dropdown>
+            </div>
 
             <div class="flex justify-end pt-4 w-full">
-                <p-button label="Submit" [fluid]="false" (click)="onSubmit()"></p-button>
+                <p-button [label]="isEditMode ? 'Edit' : 'Registrar'" [fluid]="false" (click)="onSubmit()"></p-button>
             </div>
         </div>
     </p-fluid>

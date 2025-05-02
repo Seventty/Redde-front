@@ -5,6 +5,7 @@ import { canActivateGuard } from '@/shared/core/auth.guard';
 import { UsersComponent } from '@/pages/users/users.component';
 import { CompaniesComponent } from '@/pages/companies/companies.component';
 import { CompaniesFormComponent } from '@/pages/companies-crud/companies-form/companies-form.component';
+import { CompaniesCrudComponent } from '@/pages/companies-crud/companies-crud.component';
 
 export const appRoutes: Routes = [
   {
@@ -35,8 +36,12 @@ export const appRoutes: Routes = [
         component: CompaniesFormComponent
       },
       {
+        path: 'company/create/:id',
+        component: CompaniesFormComponent
+      },
+      {
         path: 'company/detail',
-        component: CompaniesComponent
+        component: CompaniesCrudComponent
       }
     ]
   },

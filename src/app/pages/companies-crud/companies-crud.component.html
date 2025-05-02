@@ -1,32 +1,31 @@
-<div>
-    <h1 class="text-3xl font-bold mb-4">Companies list!</h1>
+<h1 class="text-3xl font-bold mb-4">Companies list!</h1>
 
-    <p-table [value]="companies">
-      <ng-template pTemplate="header">
-        <tr>
-          <th>ID</th>
-          <th>RNC</th>
-          <th>Name</th>
-          <th>Commercial Name</th>
-          <th>Category</th>
-          <th>Payment Scheme</th>
-          <th>State</th>
-          <th>Economic Activity</th>
-          <th>Government Branch</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-company>
-        <tr>
-          <td>{{ company.id }}</td>
-          <td>{{ company.rnc }}</td>
-          <td>{{ company.name }}</td>
-          <td>{{ company.commercialName }}</td>
-          <td>{{ company.category }}</td>
-          <td>{{ company.paymentScheme }}</td>
-          <td>{{ company.state }}</td>
-          <td>{{ company.economicActivity }}</td>
-          <td>{{ company.governmentBranch }}</td>
-        </tr>
-      </ng-template>
-    </p-table>
-  </div>
+<p-table [value]="companies" [columns]="headers" [tableStyle]="{ 'min-width': '80rem' }">
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns">{{ col.header }}</th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="index">
+    <tr>
+      <td *ngFor="let col of columns">
+        <ng-container *ngIf="col.field === 'options'">
+          <p-splitButton
+            [model]="rowData.actions"
+            class="p-button-text"
+            icon="pi pi-cog"
+            appendTo="body"
+            >
+          </p-splitButton>
+        </ng-container>
+
+        <ng-container *ngIf="col.field !== 'options'">
+            {{ getColumnValue(rowData, col.field) }}
+        </ng-container>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>

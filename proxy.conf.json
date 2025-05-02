@@ -4,5 +4,14 @@
       "secure": false,
       "changeOrigin": true,
       "logLevel": "debug"
+    },
+    "/dgii-api": {
+    "target": "https://www.dgii.gov.do",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/dgii-api": ""
     }
+  }
   }
