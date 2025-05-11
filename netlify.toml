@@ -3,3 +3,12 @@
   to = "https://redde-backend-production.up.railway.app/api/:splat"
   status = 200
   force = true
+
+[build]
+  command = "ng build --configuration production"
+  publish = "dist/atlantis-ng"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
