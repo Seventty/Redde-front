@@ -6,7 +6,7 @@
 
 [build]
   command = "ng build --configuration production"
-  publish = "dist/atlantis-ng"
+  publish = "dist/atlantis-ng/browser"
 
 [[redirects]]
   from = "/*"
