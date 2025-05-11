@@ -15,7 +15,7 @@ import { HttpClient } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { AuthService } from '@/shared/services/auth/auth.service';
-
+declare const google: any;
 @Component({
     selector: 'app-login',
     standalone: true,
@@ -47,6 +47,10 @@ import { AuthService } from '@/shared/services/auth/auth.service';
                         <div class="mt-6">
                             <button pButton pRipple class="block" type="submit" style="max-width: 320px; margin-bottom: 32px" (click)="onSubmit()">Login</button>
                             <span class="flex text-sm text-surface-500 dark:text-surface-400">Don’t have an account?<a class="cursor-pointer ml-1" [routerLink]="['/register']">Sign-up here</a></span>
+                        </div>
+                        <div class="flex flex-col gap-2 mt-4">
+                            <!-- <button pButton type="button" icon="pi pi-google" label="Login with Google" (click)="loginWithGoogle()" class="p-button-outlined"></button> -->
+                            <button pButton type="button" icon="pi pi-github" label="Login with GitHub" (click)="loginWithGitHub()" class="p-button-outlined"></button>
                         </div>
                     </div>
                 </p-fluid>
@@ -99,5 +103,35 @@ export class Login {
             });
             this.loginForm.markAllAsTouched();
         }
+    }
+
+    /* loginWithGoogle() {
+        google.accounts.id.initialize({
+            client_id: 'T937715911787-t7bm55ll8vjk3uhuc8d2hatvf0rl44fd.apps.googleusercontent.com',
+            callback: (response: any) => {
+                const idToken = response.credential;
+
+                this.http.post('/api/auth/google', { idToken }).subscribe({
+                    next: (res: any) => {
+                        localStorage.setItem('access_token', res.token);
+                        this.authService.setRole(res.role);
+                        this.router.navigate(['/home']);
+                    },
+                    error: () => {
+                        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Login con Google falló' });
+                    }
+                });
+            }
+        });
+
+        google?.accounts?.id.prompt();
+    } */
+
+    loginWithGitHub() {
+        const clientId = 'Ov23liYMpPN6hC9BOxSJ';
+        const redirectUri = 'http://localhost:4200/oauth/github-callback';
+        const scope = 'read:user user:email';
+
+        window.location.href = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}`;
     }
 }

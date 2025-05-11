@@ -29,7 +29,7 @@
                                 "input": "public"
                             }
                         ],
-                        "styles": ["src/styles.scss"],
+                        "styles": ["src/styles.scss", "node_modules/ngx-spinner/animations/ball-clip-rotate.css"],
                         "scripts": []
                     },
                     "configurations": {
@@ -86,7 +86,7 @@
                                 "input": "public"
                             }
                         ],
-                        "styles": ["src/styles.scss"],
+                        "styles": ["src/styles.scss", "node_modules/ngx-spinner/animations/ball-clip-rotate.css"],
                         "scripts": []
                     }
                 }

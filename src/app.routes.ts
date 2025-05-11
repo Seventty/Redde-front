@@ -6,62 +6,60 @@ import { UsersComponent } from '@/pages/users/users.component';
 import { CompaniesComponent } from '@/pages/companies/companies.component';
 import { CompaniesFormComponent } from '@/pages/companies-crud/companies-form/companies-form.component';
 import { CompaniesCrudComponent } from '@/pages/companies-crud/companies-crud.component';
+import { GithubCallbackComponent } from '@/shared/components/GithubCallbackComponent';
 
 export const appRoutes: Routes = [
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
-  {
-    path: '',
-    component: AppLayout,
-    canActivate: [canActivateGuard],
-    children: [
-      {
-        path: 'home',
-        loadComponent: () =>
-          import('@/pages/dashboard/homeDashboard').then((m) => m.HomeDashboard)
-      },
-      {
-        path: 'user/users',
-        component: UsersComponent
-      },
-      {
-        path: 'user/companies',
-        component: CompaniesComponent
-      },
-      {
-        path: 'company/create',
-        component: CompaniesFormComponent
-      },
-      {
-        path: 'company/create/:id',
-        component: CompaniesFormComponent
-      },
-      {
-        path: 'company/detail',
-        component: CompaniesCrudComponent
-      }
-    ]
-  },
-  {
-    path: 'login',
-    loadComponent: () =>
-      import('@/pages/auth/login').then((m) => m.Login)
-  },
-  {
-    path: 'register',
-    loadComponent: () =>
-      import('@/pages/auth/register').then((m) => m.Register)
-  },
-  {
-    path: 'forgot-password',
-    loadComponent: () =>
-      import('@/pages/auth/forgotpassword').then((m) => m.ForgotPassword)
-  },
-  {
-    path: '**',
-    redirectTo: 'login'
-  }
+    { path: 'oauth/github-callback', component: GithubCallbackComponent },
+    {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
+    },
+    {
+        path: '',
+        component: AppLayout,
+        canActivate: [canActivateGuard],
+        children: [
+            {
+                path: 'home',
+                loadComponent: () => import('@/pages/dashboard/homeDashboard').then((m) => m.HomeDashboard)
+            },
+            {
+                path: 'user/users',
+                component: UsersComponent
+            },
+            {
+                path: 'user/companies',
+                component: CompaniesComponent
+            },
+            {
+                path: 'company/create',
+                component: CompaniesFormComponent
+            },
+            {
+                path: 'company/create/:id',
+                component: CompaniesFormComponent
+            },
+            {
+                path: 'company/detail',
+                component: CompaniesCrudComponent
+            }
+        ]
+    },
+    {
+        path: 'login',
+        loadComponent: () => import('@/pages/auth/login').then((m) => m.Login)
+    },
+    {
+        path: 'register',
+        loadComponent: () => import('@/pages/auth/register').then((m) => m.Register)
+    },
+    {
+        path: 'forgot-password',
+        loadComponent: () => import('@/pages/auth/forgotpassword').then((m) => m.ForgotPassword)
+    },
+    {
+        path: '**',
+        redirectTo: 'login'
+    },
 ];

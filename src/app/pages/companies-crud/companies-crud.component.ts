@@ -26,13 +26,13 @@ export class CompaniesCrudComponent implements OnInit {
     headers = [
         { field: 'id', header: 'ID' },
         { field: 'rnc', header: 'RNC' },
-        { field: 'name', header: 'Name' },
-        { field: 'commercialName', header: 'Commercial Name' },
-        { field: 'category', header: 'Category' },
-        { field: 'paymentScheme', header: 'Payment Scheme' },
-        { field: 'state', header: 'State' },
-        { field: 'economicActivity', header: 'Economic Activity' },
-        { field: 'governmentBranch', header: 'Government Branch' },
+        { field: 'name', header: 'Nombre' },
+        { field: 'commercialName', header: 'Nombre Comercial' },
+        { field: 'category', header: 'Categoría' },
+        { field: 'paymentScheme', header: 'Esquema de Pago' },
+        { field: 'state', header: 'Estado' },
+        { field: 'economicActivity', header: 'Actividad Económica' },
+        { field: 'governmentBranch', header: 'Rama Gubernamental' },
         { field: 'options', header: 'Opciones' }
     ];
 
@@ -51,9 +51,8 @@ export class CompaniesCrudComponent implements OnInit {
     }
 
     getColumnValue(row: any, field: string) {
-        const nestedFields = ['category', 'paymentScheme', 'state', 'economicActivity', 'governmentBranch'];
-        return nestedFields.includes(field) ? row[field]?.name : row[field];
-      }
+        return row[field];
+    }
 
     buildMenuItems(company: any): MenuItem[] {
         return [
@@ -70,8 +69,7 @@ export class CompaniesCrudComponent implements OnInit {
         ];
     }
 
-    emitRowData(row: any, index: number) {
-    }
+    emitRowData(row: any, index: number) {}
 
     onEdit(company: any) {
         this.router.navigate(['/company/create', company.id]);
