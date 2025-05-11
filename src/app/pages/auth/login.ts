@@ -107,7 +107,7 @@ export class Login {
 
     loginWithGitHub() {
         const clientId = 'Ov23liYMpPN6hC9BOxSJ';
-        const redirectUri = `${environment.githubRedirectUri}/oauth/github-callback`;
+        const redirectUri = `${environment.githubRedirectUri}`;
         const scope = 'read:user user:email';
 
         window.location.href = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}`;
