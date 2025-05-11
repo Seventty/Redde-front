@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  githubRedirectUri: 'http://localhost:4200/oauth/github-callback'
+  githubRedirectUri: 'https://redde-front.netlify.app/oauth/github-callback'
 };
 
